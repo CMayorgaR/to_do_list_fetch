@@ -1,9 +1,11 @@
 import './App.css';
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+const API_URL = "http://assets.breatheco.de/apis/fake/todos/user/cmayorga"
 
 function App() {
 
-  fetch('https://assets.breatheco.de/apis/fake/todos/user/cmayorga', {
+  /* fetch('https://assets.breatheco.de/apis/fake/todos/user/cmayorga', {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
@@ -22,12 +24,17 @@ function App() {
     .catch(error => {
         //manejo de errores
         console.log(error);
-    });
-
+    }); */
 
     //__________________________________________________________________________________________________________________________________________________________
   const [list, setList] = useState([]);
-
+ 
+  useEffect (()=> {
+    fetch (API_URL)
+    .then ((response)=>{return response.json()})
+    .then ((data)=> console.log(data))}, []);
+  
+    
   const [task, newTask] = useState({});
 
   const handleChange = (e) => {
@@ -58,7 +65,7 @@ function App() {
             type="text"
             name="toDo"
             value={task.toDo}
-            placeholder='Tareas Pendientes' />
+            placeholder='Tareas Pendientes'/>
         </div>
         <button type="submit" className="btn btn-primary">Añadir tarea</button>
       </form>

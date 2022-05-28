@@ -50,7 +50,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>To do list:</h1>
+      <h1 className="text-center">To do list:</h1>
       <div className="container mb-4">
         <div className="row">
           <form onSubmit={(e) => handleSubmit(e)}>
@@ -65,7 +65,7 @@ function App() {
         </div>
         <br></br>
         <ul className="list-group list-group-flush">
-          {list.map((item, index) => {
+          {list.length > 0 ? (list.map((item, index) => {
             return (
               <li className="list-group-item d-flex justify-content-between" key={index}>
                 {item.label}
@@ -74,7 +74,9 @@ function App() {
                 </span>
               </li>
             )
-          })}
+          }))
+            : (<p className="text-primary text-center">La lista está vacía</p>)
+          }
         </ul>
       </div>
     </div>

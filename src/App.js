@@ -6,13 +6,16 @@ const API_URL = "http://assets.breatheco.de/apis/fake/todos/user/cmayorga"
 function App() {
 
   const [list, setList] = useState([]);
-
-
   const [task, setTask] = useState("");
-
   const handleChange = (e) => {
     setTask(e.target.value)
-  }
+  };
+
+  useEffect(() => {
+    fetch(API_URL)
+      .then((response) => { return response.json() })
+      .then(data => setList(data))
+  }, []);
 
   const handleSubmit = (evento) => {
     evento.preventDefault();
@@ -41,12 +44,6 @@ function App() {
       .then((data) => console.log(data))
       .catch((error) => console.log(error))
   };
-
-  useEffect(() => {
-    fetch(API_URL)
-      .then((response) => { return response.json() })
-      .then(data => setList(data))
-  }, []);
 
   return (
     <div className="App">
